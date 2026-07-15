@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night: #0a0a0d;
+  --color-panel: #131318;
+  --color-raised: #1b1b22;
+  --color-line: rgba(245, 243, 238, 0.09);
+  --color-ivory: #f5f3ee;
+  --color-mist: #9b98a3;
+  --color-tungsten: #e6a94e;
+  --color-tungsten-deep: #b97f2a;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-night);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ambient cinema vignette behind everything */
+.vignette::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      120% 90% at 50% 0%,
+      rgba(230, 169, 78, 0.07) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      130% 100% at 50% 110%,
+      rgba(0, 0, 0, 0.85) 0%,
+      transparent 60%
+    );
+}
+
+/* Metadata line — the "projector strip" utility style */
+.meta {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mist);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--color-tungsten);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-primary {
+  background: var(--color-tungsten);
+  color: #17110a;
+}
+.btn-primary:hover {
+  background: #f0bb66;
+}
+.btn-ghost {
+  border: 1px solid var(--color-line);
+  color: var(--color-ivory);
+  background: rgba(255, 255, 255, 0.02);
+}
+.btn-ghost:hover {
+  border-color: rgba(245, 243, 238, 0.3);
+}
+
+/* Filter chips */
+.chip {
+  border: 1px solid var(--color-line);
+  border-radius: 9999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8125rem;
+  color: var(--color-mist);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+  white-space: nowrap;
+}
+.chip:hover {
+  color: var(--color-ivory);
+}
+.chip[aria-pressed="true"] {
+  background: rgba(230, 169, 78, 0.14);
+  border-color: var(--color-tungsten-deep);
+  color: var(--color-tungsten);
+}
+
+select.field {
+  appearance: none;
+  background: var(--color-panel);
+  border: 1px solid var(--color-line);
+  border-radius: 0.625rem;
+  padding: 0.55rem 2.2rem 0.55rem 0.85rem;
+  font-size: 0.875rem;
+  color: var(--color-ivory);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239b98a3' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
